@@ -1,0 +1,60 @@
+menu "ProjConfig"
+
+    config GPIO_LED
+        int "GPIO_LEDS"
+        default 12
+        help
+            Give the gpio pin number
+
+    config LEDS_COUNT
+        int "LEDS_COUNT"
+        default 6
+        help 
+            How many leds does the strip have
+
+    config FADING_SPEED
+        int "FADING_SPEED"
+        default 50
+        help
+            Set the speed for fading
+
+    config FADING_RGB_VALUE_r
+        int "RED_VALUE"
+        range 0 254
+        default 254
+        help
+            Set the start value of red for fading mode
+
+    config FADING_RGB_VALUE_g
+        int "GREEN_VALUE"
+        range 0 254
+        default 0
+        help
+            Set the start value of green for fading mode
+
+    config FADING_RGB_VALUE_b
+        int "BLUE_VALUE"
+        range 0 254
+        default 0
+        help
+            Set the start value of blue for fading mode
+
+endmenu
+
+menu "ir"
+    config GPIO_IR
+        int "GPIO_IR"
+        default 0
+        help
+            Give the gpio ir number
+    
+    config RESOLUTION_IR
+        int "resolution -> 1 tick = 1us"
+        default 1000000
+
+    config NEC_DECODE_MARGIN
+        int "Tolerance"
+        default 200
+            help
+                Tolerance for parsing RMT symbols into bit stream
+endmenu

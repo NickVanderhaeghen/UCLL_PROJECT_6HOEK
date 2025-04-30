@@ -1,0 +1,23 @@
+{
+    "C_Cpp.intelliSenseEngine": "default",
+    "idf.espIdfPath": "/Users/nickgroetaers/esp/v5.3.2/esp-idf",
+    "idf.openOcdConfigs": [
+        "board/esp32s3-builtin.cfg"
+    ],
+    "idf.port": "/dev/tty.usbmodem21401",
+    "idf.toolsPath": "/Users/nickgroetaers/esp/v5.3.2/",
+    "files.associations": {
+        "esp_log.h": "c",
+        "task.h": "c",
+        "ledsturing.h": "c",
+        "kleuren.h": "c",
+        "touch.h": "c"
+    },
+    "idf.flashType": "UART",
+    "idf.customExtraVars": {
+        "OPENOCD_SCRIPTS": "/Users/nickgroetaers/.espressif/tools/openocd-esp32/v0.12.0-esp32-20240318/openocd-esp32/share/openocd/scripts",
+        "ESP_ROM_ELF_DIR": "/Users/nickgroetaers/.espressif/tools/esp-rom-elfs/20230320/",
+        "IDF_TARGET": "esp32s3"
+    },
+    "idf.pythonInstallPath": "/opt/homebrew/bin/python3"
+}
