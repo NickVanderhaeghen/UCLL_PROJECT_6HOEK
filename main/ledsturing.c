@@ -9,7 +9,7 @@ const RGBColor kleurenlijst_rgb[] = {
     {"GEEL", 255, 255,   0},
     {"PAARS", 128,   0, 128},
     {"CYAAN",  0, 255, 255},
-    {"ORANJE", 255, 165,   0},
+    {"ORANJE", 255, 102,   0},
     {"ROZE", 255, 153, 153},  //GECHECKD
 
     // Extra kleuren ->10
@@ -25,7 +25,7 @@ const RGBColor kleurenlijst_rgb[] = {
     {"ZALM", 255, 204, 204},  //GECHECKD
 
     // Extra kleurn (11 kleuren) ->11
-    {"LICHTROOD", 255, 102, 102},   //GECHECKD
+    {"LICHTROOD", 155, 0, 0},   //GECHECKD
     {"LICHTGROEN", 0, 230, 0},   //GECHECKD
     {"BABYBLAUW", 51, 214, 255},   //GECHECKD
     {"BABYBLAUW2", 51, 214, 255},  //GECHECKD
@@ -39,8 +39,11 @@ const RGBColor kleurenlijst_rgb[] = {
 };
 
 static led_strip_handle_t led_strip;
-RGBColor huidige_kleur;
+RGBColor huidige_kleur = {0};
 uint8_t huidige_kleur_index = 0;
+RGBColor displayColor = {0};
+
+float dim_brighten_factor = 0.7;
 
 void config_led(){
     led_strip_config_t strip_config = {
@@ -115,6 +118,37 @@ void next_color(){
     all_same(&huidige_kleur);
 }
 
+
+void helderheid_omhoog(){    
+    if((displayColor.r / dim_brighten_factor) <= 255 && (displayColor.g / dim_brighten_factor) <= 255 && (displayColor.b / dim_brighten_factor) <= 255){
+
+
+        huidige_kleur.r = displayColor.r / dim_brighten_factor;
+        huidige_kleur.g = displayColor.g / dim_brighten_factor;
+        huidige_kleur.b = displayColor.b / dim_brighten_factor;
+
+    }
+    displayColor = huidige_kleur;
+    
+    all_same(&displayColor);
+}
+
+void helderheid_omlaag(){
+    if((displayColor.r * dim_brighten_factor) > 9){
+        huidige_kleur.r = displayColor.r * dim_brighten_factor;
+    }
+    if((displayColor.g * dim_brighten_factor) > 9){
+        huidige_kleur.g = displayColor.g * dim_brighten_factor;
+    }
+    if((displayColor.b * dim_brighten_factor) > 9){
+        huidige_kleur.b = displayColor.b * dim_brighten_factor;
+    }
+    displayColor = huidige_kleur;
+    
+    all_same(&displayColor);
+}
+
+
 void set_color(const RGBColor* color, int index){    
     led_strip_set_pixel(led_strip, index, color -> r, color -> g, color -> b);
 }
@@ -125,9 +159,17 @@ void queue_to_led_task(void *pvParameters){
 
     while (1) {
         if (xQueueReceive(main_queue, &received_v, portMAX_DELAY) == pdPASS) {
-            RGBColor displayColor;
             if(strcmp(received_v.kleurnaam, "next_color") == 0){
                 next_color();
+            }
+            else if(strcmp(received_v.kleurnaam, "HELDERHEID_OMHOOG") == 0){                
+                helderheid_omhoog();
+            }
+            else if(strcmp(received_v.kleurnaam, "HELDERHEID_OMLAAG") == 0){                
+                helderheid_omlaag();
+            }
+            else if(strcmp(received_v.kleurnaam, "FADING") == 0){                
+                rgb_fading();
             }
             for (int i = 0; i < 30; i++) {
                 if (strcmp(received_v.kleurnaam, kleurenlijst_rgb[i].kleurnaam) == 0) {

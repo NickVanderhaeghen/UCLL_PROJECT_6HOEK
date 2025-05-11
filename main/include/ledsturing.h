@@ -2,7 +2,8 @@
 #include <led_strip.h>
 #include <string.h>
 #include "include/kleuren.h"
-#include "include/queue.h"
+#include "include/queue.h"``
+#include "math.h"
 
 
 
@@ -19,6 +20,12 @@ void rgb_fading();
 
 void next_color();
 //deze gaat de kleur naar een andere kleur veranderen
+
+void helderheid_omhoog();
+
+void helderheid_omlaag();
+
+
 
 void set_color(const RGBColor* color, int index);
 //deze functie wordt door de vorige functies gebruikt.

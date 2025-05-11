@@ -37,7 +37,10 @@ const Kleur kleurenlijst[] = {
     {"ir_GREEN_UP", 0xEA15},
     {"ir_GREEN_DOWN", 0xEE11},
     {"ir_BLUE_UP", 0xE916},
-    {"ir_BLUE_DOWN", 0xED12}
+    {"ir_BLUE_DOWN", 0xED12},
+    {"HELDERHEID_OMHOOG", 0xA35C},
+    {"HELDERHEID_OMLAAG", 0xA25D},
+    {"FADING", 0xBE41}
 };
 
 

@@ -11,7 +11,9 @@
         "task.h": "c",
         "ledsturing.h": "c",
         "kleuren.h": "c",
-        "touch.h": "c"
+        "touch.h": "c",
+        "sstream": "c",
+        "regex": "c"
     },
     "idf.flashType": "UART",
     "idf.customExtraVars": {
