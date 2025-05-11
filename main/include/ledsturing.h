@@ -12,6 +12,8 @@ void config_led();
 void all_same(const RGBColor* color);
 //zet alle leds op 1 kleur
 
+void blink();
+
 void rgb_fading();
 //zet alle leds op 1 kleur en begind te faden(zachtjes van kleur veranderen)
 

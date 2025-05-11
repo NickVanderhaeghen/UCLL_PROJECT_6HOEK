@@ -1,6 +1,7 @@
 #include "include/ledsturing.h"
 
 const RGBColor kleurenlijst_rgb[] = {
+    {"OFF",  0, 0,   0},
     {"ROOD",  255, 0,   0},
     {"GROEN",  0, 255,   0},
     {"BLAUW",  0,   0, 255},
@@ -32,7 +33,7 @@ const RGBColor kleurenlijst_rgb[] = {
     {"SMARAGD", 80, 200, 120},
     {"DONKERGROEN", 0, 100, 0},
     {"DONKERPAARS", 75, 0, 130},
-    {"LICHTPAARS", 221, 160, 221},
+    {"LICHTPAARS", 155, 0, 155},
     {"FUCHSIA", 255, 0, 255},
     {"LICHTORANJE", 255, 200, 0}
 };
@@ -60,6 +61,22 @@ void all_same(const RGBColor* color){
         set_color(color, i);
     }
     led_strip_refresh(led_strip);
+}
+
+void blink(){
+    
+    for(int i= 0; i <= 6; i++){
+        for(int j= 0; j < CONFIG_LEDS_COUNT; j++){
+            if(i%2 == 0){
+                set_color(&huidige_kleur, i);
+            }
+            else{
+                set_color("OFF", i);
+            }
+        }
+        led_strip_refresh(led_strip);
+        vTaskDelay(500);
+    }
 }
 
 void rgb_fading(){

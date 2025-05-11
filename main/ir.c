@@ -11,6 +11,7 @@ typedef struct {
 
 // Definieer de lijst met kleuren
 const Kleur kleurenlijst[] = {
+    {"OFF", 0xBF40},
     {"ROOD", 0xA758},
     {"LICHTROOD", 0xAB54},
     {"GROEN", 0xA659},

@@ -41,7 +41,7 @@ menu "ProjConfig"
 
 endmenu
 
-menu "ir"
+menu "ir_config"
     config GPIO_IR
         int "GPIO_IR"
         default 0
@@ -57,4 +57,18 @@ menu "ir"
         default 200
             help
                 Tolerance for parsing RMT symbols into bit stream
+endmenu
+
+menu "touch_config"
+    config TOUCH_GPIO
+        int "TOUCH_GPIO"
+        default 4
+        help
+            Give the gpio ir number
+    
+    config TOUCH_THRESHOLD
+        int "TOUCH_THRESHOLD"
+        default 300
+
+
 endmenu

@@ -34,6 +34,4 @@ void app_main(void)
     xTaskCreate(ir_task, "ir", 10000, NULL, 5, &xt_ir);
     xTaskCreate(touch_task, "touch", 2048, NULL, 5, &xt_touch);
     xTaskCreate(queue_to_led_task, "queue to led", 2048, NULL, 5, &xt_hand);
-
-
 }
