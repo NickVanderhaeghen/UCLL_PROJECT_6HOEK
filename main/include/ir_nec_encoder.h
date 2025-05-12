@@ -8,6 +8,8 @@
 #include <stdint.h>
 #include "driver/rmt_encoder.h"
 
+#pragma once
+
 
 #ifdef __cplusplus
 extern "C" {

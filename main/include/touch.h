@@ -10,6 +10,8 @@
 #include "driver/gptimer.h"
 #include <string.h>
 
+#include "driver/touch_pad.h"
+#include "esp_log.h"
 
 void config_touch();
 

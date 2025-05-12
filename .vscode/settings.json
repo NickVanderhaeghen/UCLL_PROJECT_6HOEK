@@ -4,7 +4,7 @@
     "idf.openOcdConfigs": [
         "board/esp32s3-builtin.cfg"
     ],
-    "idf.port": "/dev/tty.usbmodem21101",
+    "idf.port": "/dev/tty.usbmodem1101",
     "idf.toolsPath": "/Users/nickgroetaers/esp/v5.3.2/",
     "files.associations": {
         "esp_log.h": "c",

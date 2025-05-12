@@ -5,7 +5,7 @@
 #include "include/queue.h"``
 #include "math.h"
 
-
+#pragma once
 
 void config_led();
 //config de ledstrip

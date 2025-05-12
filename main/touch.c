@@ -3,13 +3,13 @@
 
 gptimer_handle_t touch_timer_handle;
 
+int touch_gpio = 12;
 
 void config_touch(){
-
-    // Init touch sensor
+    gpio_reset_pin(CONFIG_TOUCH_GPIO);
     touch_pad_init();
-    //touch_pad_config(CONFIG_TOUCH_GPIO, 0); // Standaard waarde ->lolin
-    touch_pad_config(TOUCH_PAD_NUM5); // Standaard waarde ->s3
+    touch_pad_config(CONFIG_TOUCH_GPIO); // Standaard waarde ->s3
+    touch_pad_set_thresh(CONFIG_TOUCH_GPIO, CONFIG_TOUCH_THRESHOLD);
 }
 
 void config_touch_timer(){
@@ -28,20 +28,29 @@ void touch_timer(){
 
 void touch_task(void *pvParameters){
     config_touch();
-    
+    touch_pad_denoise_t denoise = {
+        /* The bits to be cancelled are determined according to the noise level. */
+        .grade = TOUCH_PAD_DENOISE_BIT4,
+        .cap_level = TOUCH_PAD_DENOISE_CAP_L4,
+    };
+    touch_pad_denoise_set_config(&denoise);
+    touch_pad_denoise_enable();
+    touch_pad_set_fsm_mode(TOUCH_FSM_MODE_TIMER);
+    touch_pad_fsm_start();
     while (1) {
-        uint16_t touch_value;
-        //touch_pad_read(TOUCH_PAD_NUM4, &touch_value); //lolin
-        touch_pad_read_raw_data(TOUCH_PAD_NUM5, &touch_value); // s3
+        uint32_t touch_value;
+        touch_pad_read_raw_data(CONFIG_TOUCH_GPIO, &touch_value); // s3
 
-        printf("Touch waarde: %d\n", touch_value);
+        printf("Touch waarde: %ld\n", touch_value);
 
-        if (touch_value < CONFIG_TOUCH_THRESHOLD) { // Aangepaste drempelwaarde
+        if (touch_value > CONFIG_TOUCH_THRESHOLD) { // Aangepaste drempelwaarde
             queue_msg_t msg;
             strcpy(msg.kleurnaam, "next_color");
             xQueueSend(main_queue, &msg, 1000);
 
-        } else {
+        } 
+        else {
+
         }
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }

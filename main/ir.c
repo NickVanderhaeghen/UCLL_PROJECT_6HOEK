@@ -2,7 +2,6 @@
 
 
 
-
 typedef struct {
     char naam[20];
     uint16_t waarde;
